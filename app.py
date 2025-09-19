@@ -7,8 +7,11 @@ from iris_app.viz import scatter
 
 st.set_page_config(page_title="Iris Classifier", page_icon="🌸", layout="wide")
 
-st.title("Iris mini project")
-st.caption("Data import, filtering, simple model, and plots.")
+
+st.title("DSB Tooling for Data Science Final Project")
+
+st.header("Iris mini project")
+st.write("Data import, filtering, simple model, and plots.")
 
 # 1) Load
 df = load_iris_df()
