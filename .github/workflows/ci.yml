@@ -28,10 +28,18 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
-      # Ensure src/ is on the import path (fixes ModuleNotFoundError: iris_app)
+      # Ensure src/ is on PYTHONPATH so imports like `from iris_app...` work
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
 
       - name: Debug environment
         run: |
-          e
+          echo "PYTHONPATH=$PYTHONPATH"
+          python -c "import sys; print('sys.path='); print('\n'.join(sys.path))"
+          pip list
+
+      - name: Collect tests
+        run: pytest --collect-only -q
+
+      - name: Run tests
+        run: pytest -vv --maxfail=1
